@@ -24,7 +24,7 @@ def search_keywords_in_csv(csv_file, searchLength, searchYear, searchArtist, sea
     return matchSongs
 
 #Localizacion del archivo CSV
-csv_file = "directorio de archivo csv"
+csv_file = "ClassicHit.csv"
 
 #Declaracion de variables de busqueda
 searchArtist=""
