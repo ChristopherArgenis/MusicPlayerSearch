@@ -1,4 +1,10 @@
 import pywhatkit as pwt
+import pandas as pd
+
+# Lectura del csv y guardado en un objeto dataframe
+df = pd.read_csv("ClassicHit.csv")
+# Dataframe a partir de las columnas del csv
+Music_db = df[["Track", "Artist", "Year", "Duration", "Popularity", "Genre", "Energy", "Danceability"]]
 
 class Consulta:
     def __init__(self, df):
