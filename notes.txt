@@ -1,0 +1,20 @@
+# Deficion de Funciones.-
+
+# 9 / Octubre / 24
+# Funcion para obtener valores unicos segun columna *Check
+# Uso proximo para sacar la probabilidad *Check
+# Extra:
+# Funcion de filtrado segun año con 3 posibles casos *Check
+
+# 10 / Octubre / 24
+# Funcion de filtrado segun nombre de artista o banda *Check
+# Cambiar funcion de probabilidad para solo dividir por uni-valores del valor
+
+# 
+
+Clase Consulta:
+    def __init__(self, df):
+        self.df = df
+
+    def find(self):
+        
