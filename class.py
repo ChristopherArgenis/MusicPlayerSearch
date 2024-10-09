@@ -37,12 +37,12 @@ class proba:
     def proba_total(self, df):
         self.df = df
         self.proba = 0
-        if len(self.dfM) < 125:
-            self.proba = ((len(self.dfM)/len(self.df))*100)
-            print(f"{self.proba:.2f}% de Probabilidad")
+        if len(self.dfM.df) < 125:
+            self.proba = ((len(self.dfM.df)/len(self.df))*100)
+            return f"{self.proba:.2f}% de Probabilidad"
         else:
-            self.proba = int((len(self.dfM)/len(self.df))*100)
-            print(f"{self.proba}% de Probabilidad")
+            self.proba = int((len(self.dfM.df)/len(self.df))*100)
+            return f"{self.proba}% de Probabilidad"
 
 class link_yt:
     def __init__(self, name:str):
@@ -50,3 +50,17 @@ class link_yt:
 
     def url_yt(self):
         pwt.playonyt(self.name)
+
+# Declaracion de objetos
+query = Consulta(Music_db)
+# Metodos activos en el objeto
+query.ft_genre("Alt. Rock")
+query.ft_year("Igual", 2000)
+
+pro = proba(query)
+
+print(query.df)
+print(pro.proba_total(Music_db))
+
+redirect = link_yt("Everything In Its Right Place")
+redirect.url_yt()
