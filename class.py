@@ -11,8 +11,7 @@ class Consulta:
         self.df = df
 
     def ft_year(self, select=None, year1=None, year2=None):
-        self.year1 = year1
-        self.year2 = year2
+        self.year1, self.year2 = year1, year2
         self.select = select
         match self.select:
             case "Igual":
@@ -37,7 +36,7 @@ class proba:
     def proba_total(self, df):
         self.df = df
         self.proba = 0
-        if len(self.dfM.df) < 125:
+        if len(self.dfM.df) < 150:
             self.proba = ((len(self.dfM.df)/len(self.df))*100)
             return f"{self.proba:.2f}% de Probabilidad"
         else:
@@ -54,13 +53,13 @@ class link_yt:
 # Declaracion de objetos
 query = Consulta(Music_db)
 # Metodos activos en el objeto
-query.ft_genre("Alt. Rock")
-query.ft_year("Igual", 2000)
+# query.ft_genre("Alt. Rock")
+query.ft_year("Apartir", 2000)
 
 pro = proba(query)
 
 print(query.df)
 print(pro.proba_total(Music_db))
 
-redirect = link_yt("Everything In Its Right Place")
-redirect.url_yt()
+# redirect = link_yt("Everything In Its Right Place")
+# redirect.url_yt()

@@ -54,3 +54,4 @@ def genre(df, genre):
 genre_df = genre(Music_db, "Pop")
 print(genre_df)
 # art_df = artist_filter(Music_db, '3 Doors Down')
+print(len(Music_db))
