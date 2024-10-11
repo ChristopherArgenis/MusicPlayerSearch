@@ -1,4 +1,3 @@
-import pywhatkit as pwt
 import pandas as pd
 from flask import Flask, render_template
 
@@ -40,21 +39,13 @@ class proba:
         else:
             self.proba = int((len(self.dfM.df)/len(self.df))*100)
             return f"{self.proba}% de Probabilidad"
-
-class link_yt:
-    def __init__(self, name:str):
-        self.name = name
-
-    def url_yt(self):
-        pwt.playonyt(self.name)
-
+        
 @app.route('/')
 def main():
     df = pd.read_csv("ClassicHit.csv") # Lectura del csv y guardado en un objeto dataframe
-    Music_db = df[["Track", "Artist", "Year", "Duration", "Popularity", "Genre", "Energy"]] # Dataframe a partir de las columnas del csv
+    Music_db = df[["Track", "Artist", "Year", "Genre", "Popularity"]] # Dataframe a partir de las columnas del csv
     query = Consulta(Music_db)
 
-    return render_template("Sitio_web.html", query=query)
-
+    return render_template("Sitio_web.html")
 if __name__ == '__main__':
     app.run()
