@@ -1,0 +1,12 @@
+# Logica de la interfaz al momento de hacerlo web
+"""
+    Titulo:
+
+    Select (Artist)- Select (genre)- Select (year) - Boton Enviar (Si es necesario?)
+
+    * Tabla *
+
+    Probabilidad de cumplirse las diferentes condiciones
+
+    Link de youtube
+"""
