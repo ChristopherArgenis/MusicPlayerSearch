@@ -14,7 +14,7 @@ class Consulta:
             case "Igual":
                 self.df = self.df[self.df["Year"] == year1]
             case "Desde":
-                self.df = self.df[(self.df["Year"] > year1) & (self.df["Year"] < year2)]
+                self.df = self.df[(self.df["Year"] >= year1) & (self.df["Year"] <= year2)]
             case "Apartir":
                 self.df = self.df[self.df["Year"] > year1]
 
