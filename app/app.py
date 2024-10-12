@@ -1,5 +1,5 @@
 import pandas as pd
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -13,7 +13,7 @@ class Consulta:
         match self.select:
             case "Igual":
                 self.df = self.df[self.df["Year"] == year1]
-            case "Intervalo":
+            case "Desde":
                 self.df = self.df[(self.df["Year"] > year1) & (self.df["Year"] < year2)]
             case "Apartir":
                 self.df = self.df[self.df["Year"] > year1]
@@ -40,12 +40,26 @@ class proba:
             self.proba = int((len(self.dfM.df)/len(self.df))*100)
             return f"{self.proba}% de Probabilidad"
         
-@app.route('/')
+@app.route('/', methods=["GET", "POST"])
 def main():
-    df = pd.read_csv("ClassicHit.csv") # Lectura del csv y guardado en un objeto dataframe
-    Music_db = df[["Track", "Artist", "Year", "Genre", "Popularity"]] # Dataframe a partir de las columnas del csv
+    # Lectura del csv y guardado en un objeto dataframe
+    df = pd.read_csv("ClassicHit.csv")
+
+    # Dataframe a partir de las columnas del csv
+    Music_db = df[["Track", "Artist", "Year", "Genre", "Popularity"]]
+
+    # Valores unicos de los años y ordenamiento
+    years = Music_db["Year"].unique()
+    years = list(years)
+    years.sort()
+
+    # Instancia de la clase Consulta para hacer una.
     query = Consulta(Music_db)
 
-    return render_template("Sitio_web.html")
+    if request.method == "POST":
+        intervalo = request.form['select']
+        print(intervalo)
+
+    return render_template("Sitio_web.html", consulta=query, years=years)
 if __name__ == '__main__':
     app.run()

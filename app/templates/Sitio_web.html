@@ -6,6 +6,54 @@
     <title>Un Retrato Musical</title>
 </head>
 <body>
+<form class="form" method="POST">
     <h1>Un retrato musical: Visualizando tus gustos y Preferencias.</h1>
+    <select name="artist" id="artist">
+        {% for artist in consulta.df["Artist"].unique() %}
+            <option value={{artist}}>{{artist}}</option>
+        {% endfor %}
+    </select>
+    <select name="genre" id="genre">
+        {% for genre in consulta.df["Genre"].unique() %}
+            <option value={{genre}}>{{genre}}</option>
+        {% endfor %}
+    </select>
+    <select name="select" id="select">
+        <option value="Igual" name="Igual">Igual</option>
+        <option value="Apartir" name="Apartir">Apartir</option>
+        <option value="Desde" name="Desde">Desde</option>
+    </select>
+    <select name="year1" id="year1">
+        {% for year in years %}
+            <option value={{year}}>{{year}}</option>
+        {% endfor %}
+    </select>
+    a
+    <select name="year2" id="year2">
+        {% for year in years %}
+            <option value={{year}}>{{year}}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Enviar</button>
+</form>
+    <br><br>
+    <table>
+        <thead>
+            <tr>
+                {% for column in consulta.df.columns %}
+                    <th>{{column}}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in consulta.df.head().values.tolist()[1:] %}
+            <tr>
+                {% for cell in row %}
+                    <td>{{ cell }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>
