@@ -58,6 +58,8 @@ def main():
 
     if request.method == "POST":
         artist = request.form['artist']
+        # if artist != "Select":
+            # query.ft_artist(artist)
         intervalo = request.form['select']
         print(f" Artista: {artist}, Intervalo: {intervalo}")
 
