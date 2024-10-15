@@ -57,9 +57,11 @@ def main():
     query = Consulta(Music_db)
 
     if request.method == "POST":
+        artist = request.form['artist']
         intervalo = request.form['select']
-        print(intervalo)
+        print(f" Artista: {artist}, Intervalo: {intervalo}")
 
     return render_template("Sitio_web.html", consulta=query, years=years)
+
 if __name__ == '__main__':
     app.run()
