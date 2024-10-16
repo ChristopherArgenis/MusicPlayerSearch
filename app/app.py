@@ -16,7 +16,7 @@ class Consulta:
             case "Desde":
                 self.df = self.df[(self.df["Year"] >= year1) & (self.df["Year"] <= year2)]
             case "Apartir":
-                self.df = self.df[self.df["Year"] > year1]
+                self.df = self.df[self.df["Year"] >= year1]
 
     def ft_artist(self, artist):
         self.artist = artist
@@ -55,15 +55,35 @@ def main():
 
     # Instancia de la clase Consulta para hacer una.
     query = Consulta(Music_db)
+    probab = 0
 
     if request.method == "POST":
         artist = request.form['artist']
-        # if artist != "Select":
-            # query.ft_artist(artist)
-        intervalo = request.form['select']
-        print(f" Artista: {artist}, Intervalo: {intervalo}")
+        genre = request.form['genre']
+        parameter = request.form['select']
+        year1 = int(request.form['year1'])
+        year2 = int(request.form['year2'])
 
-    return render_template("Sitio_web.html", consulta=query, years=years)
+        if artist != "Select":
+            query.ft_artist(artist)
+        if genre != "Select":
+            query.ft_genre(genre)
+        
+        match parameter:
+            case "Select":
+                pass
+            case "Igual":
+                query.ft_year(select="Igual", year1=year1)
+            case "Apartir":
+                query.ft_year(select="Apartir", year1=year1)
+            case "Desde":
+                query.ft_year(select="Desde", year1=year1, year2=year2)
+
+        probabilidad = proba(query)
+        probab = probabilidad.proba_total(Music_db)
+        query.df.sort_values(by="Popularity", ascending=False, inplace=True)
+
+    return render_template("Sitio_web.html", consulta=query, years=years, proba=probab)
 
 if __name__ == '__main__':
     app.run()
