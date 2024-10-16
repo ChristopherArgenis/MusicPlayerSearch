@@ -14,7 +14,7 @@
     <select name="artist" id="artist">
         <option value="Select">Nulo</option>
         {% for artist in consulta.df["Artist"].unique() %}
-            <option value={{artist}}>{{artist}}</option>
+            <option value={{artist|tojson}}>{{artist}}</option>
         {% endfor %}
     </select>
 
@@ -22,12 +22,13 @@
     <select name="genre" id="genre">
         <option value="Select">Nulo</option>
         {% for genre in consulta.df["Genre"].unique() %}
-            <option value={{genre}}>{{genre}}</option>
+            <option value={{genre|tojson}}>{{genre}}</option>
         {% endfor %}
     </select>
 
     <label for="select">Parámetro de año:</label>
     <select name="select" id="select">
+        <option value="Select">Nulo</option>
         <option value="Igual" name="Igual">Igual</option>
         <option value="Apartir" name="Apartir">Apartir</option>
         <option value="Desde" name="Desde">Desde</option>
@@ -42,7 +43,7 @@
 
     <label for="year2">Año 2:</label>
     <select name="year2" id="year2">
-        <option value="Select">Nulo</option>
+        <option value="1">Nulo</option>
         {% for year in years %}
             <option value={{year}}>{{year}}</option>
         {% endfor %}
@@ -55,13 +56,15 @@
     <table>
         <thead>
             <tr>
-                {% for column in consulta.df.columns %}
-                    <th>{{column}}</th>
-                {% endfor %}
-            </tr>
+                <th>Cancion(es)</th>
+                <th>Artista(s)</th>
+                <th>Año</th>
+                <th>G&eacute;nero</th>
+                <th>Popularidad</th>
+              </tr>
         </thead>
         <tbody>
-            {% for row in consulta.df.head().values.tolist()[1:] %}
+            {% for row in consulta.df.head(10).values.tolist()[1:] %}
             <tr>
                 {% for cell in row %}
                     <td>{{ cell }}</td>
@@ -73,7 +76,7 @@
 <!-- Espacio de la Probabilidad -->
 <div class="probabilidad">
     <h2>Probabilidad de la canción</h2>
-    <p>La probabilidad de que salga la canción según los filtros seleccionados es: 0</p>
+    <p>La probabilidad de que salga la canción según los filtros seleccionados es: {{proba}}</p>
 </div>
 </body>
 </html>
